@@ -306,6 +306,7 @@
 				1B617E111E1FF1E8000E2101 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
