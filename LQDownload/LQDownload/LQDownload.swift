@@ -221,11 +221,46 @@ extension LQDownload: URLSessionDataDelegate {
 	
 	//接受到服务器返回的数据
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+		guard let sessionModel = getSessionModel(dataTask.taskIdentifier) else {
+			return
+		}
 		
+		//写入数据
+		data.withUnsafeBytes { (unsafePointer: UnsafePointer<UInt8>) -> Void in
+			sessionModel.stream?.write(unsafePointer, maxLength: data.count)
+		}
+		
+		//更新下载进度
+		let receivedSize = fileDownloadSize(sessionModel.url)
+		let expectedSize = sessionModel.totalLength
+		let progress = Double(receivedSize) / Double(expectedSize)
+		
+		sessionModel.progressBlock(receivedSize, expectedSize, progress)
 	}
 	
 	//请求完毕 (成功/失败)
 	func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+		guard var sessionModel = getSessionModel(task.taskIdentifier) else {
+			return
+		}
 		
+		if isComplate(sessionModel.url) {
+			//下载完成
+			sessionModel.stateBlock(.complete)
+		} else {
+			//下载失败
+			sessionModel.stateBlock(.failed)
+		}
+		
+		//关闭流
+		sessionModel.stream?.close()
+		sessionModel.stream = nil
+		
+		//清除任务
+		guard let fileName = fileName(sessionModel.url) else {
+			return
+		}
+		tasks.removeValue(forKey: fileName)
+		sessionModels.removeValue(forKey: task.taskIdentifier)
 	}
 }
