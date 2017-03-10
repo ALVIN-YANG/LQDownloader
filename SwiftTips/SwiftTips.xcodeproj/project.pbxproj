@@ -15,6 +15,10 @@
 		FF58BAD71E6D177E0038E352 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF58BAD51E6D177E0038E352 /* LaunchScreen.storyboard */; };
 		FF6CD6E51E7113F2002AB237 /* Drinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6CD6E41E7113F2002AB237 /* Drinking.swift */; };
 		FF6CD6E81E7127F6002AB237 /* String+Md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6CD6E71E7127F6002AB237 /* String+Md5.swift */; };
+		FFD662091E72914A0007B856 /* 关联类型.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD662081E72914A0007B856 /* 关联类型.swift */; };
+		FFD6620B1E729A250007B856 /* 同步锁.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD6620A1E729A250007B856 /* 同步锁.swift */; };
+		FFD6620D1E729E4B0007B856 /* 转移内存管理权.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD6620C1E729E4B0007B856 /* 转移内存管理权.swift */; };
+		FFD6620F1E72AEAF0007B856 /* 随机数生成.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD6620E1E72AEAF0007B856 /* 随机数生成.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,10 @@
 		FF6CD6E41E7113F2002AB237 /* Drinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drinking.swift; sourceTree = "<group>"; };
 		FF6CD6E61E7127A0002AB237 /* SwiftTips-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftTips-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF6CD6E71E7127F6002AB237 /* String+Md5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Md5.swift"; sourceTree = "<group>"; };
+		FFD662081E72914A0007B856 /* 关联类型.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "关联类型.swift"; sourceTree = "<group>"; };
+		FFD6620A1E729A250007B856 /* 同步锁.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "同步锁.swift"; sourceTree = "<group>"; };
+		FFD6620C1E729E4B0007B856 /* 转移内存管理权.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "转移内存管理权.swift"; sourceTree = "<group>"; };
+		FFD6620E1E72AEAF0007B856 /* 随机数生成.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "随机数生成.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,10 @@
 				FF28FF971E6D18F100958B08 /* Delay.swift */,
 				FF6CD6E41E7113F2002AB237 /* Drinking.swift */,
 				FF6CD6E71E7127F6002AB237 /* String+Md5.swift */,
+				FFD662081E72914A0007B856 /* 关联类型.swift */,
+				FFD6620A1E729A250007B856 /* 同步锁.swift */,
+				FFD6620C1E729E4B0007B856 /* 转移内存管理权.swift */,
+				FFD6620E1E72AEAF0007B856 /* 随机数生成.swift */,
 				FF58BAD01E6D177E0038E352 /* Main.storyboard */,
 				FF58BAD31E6D177E0038E352 /* Assets.xcassets */,
 				FF6CD6E61E7127A0002AB237 /* SwiftTips-Bridging-Header.h */,
@@ -150,8 +162,12 @@
 			files = (
 				FF28FF981E6D18F100958B08 /* Delay.swift in Sources */,
 				FF6CD6E81E7127F6002AB237 /* String+Md5.swift in Sources */,
+				FFD662091E72914A0007B856 /* 关联类型.swift in Sources */,
 				FF58BACF1E6D177E0038E352 /* ViewController.swift in Sources */,
 				FF58BACD1E6D177E0038E352 /* AppDelegate.swift in Sources */,
+				FFD6620B1E729A250007B856 /* 同步锁.swift in Sources */,
+				FFD6620D1E729E4B0007B856 /* 转移内存管理权.swift in Sources */,
+				FFD6620F1E72AEAF0007B856 /* 随机数生成.swift in Sources */,
 				FF6CD6E51E7113F2002AB237 /* Drinking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
