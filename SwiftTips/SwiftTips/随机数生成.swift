@@ -21,14 +21,18 @@ import UIKit
  
   arc4random 所返回的值不论在什么平台上都是一个 UInt32,
  
-  于是在 32 位 的平台上就有一半几率在进行 Int 转换时越界, 进而崩溃
+  于是在 32 位 的平台上就有一半几率在进行 Int 转换时越界
+
+	(而 Int()  在 32位机上装不下 UInt32), 进而崩溃
  
   所以需要限制传入的参数
  
  */
 
+
+
 func random(in range: Range<Int>) -> Int {
-  
+	
   let count = UInt32(range.upperBound - range.lowerBound)
   
   return Int(arc4random_uniform(count)) + range.lowerBound
