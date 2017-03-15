@@ -19,11 +19,11 @@ class ViewController: UIViewController {
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     let task = delay(5) {
-      print("拨打110")
+      printLog("拨打110")
     }
     
     let _ = delay(3) {
-      print("还是不打了")
+      printLog("还是不打了")
       cancel(task)
     }
     
@@ -37,8 +37,8 @@ class ViewController: UIViewController {
     
     let beerClass = NSStringFromClass(type(of: beer))
     
-    print("\(cokeClass)/\(beerClass)")
-    debugPrint("md5: \(String(describing: Drinking.self).MD5)")
+    printLog("\(cokeClass)/\(beerClass)")
+    printLog("md5: \(String(describing: Drinking.self).MD5)")
     
     //关联类型
     let a = MyClass()

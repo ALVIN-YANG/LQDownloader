@@ -27,18 +27,26 @@ class LQDownload: NSObject {
 	
 	//下载路径: 重新下载或者重新生成的数据放在Library/Caches里面
 	func downloadDirectory() -> String {
-		
-		return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!.appending("/TTCache")
+		let path = NSHomeDirectory() + "/Documents/TTDownload"
+    if !FileManager.default.fileExists(atPath: path) {
+      try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+    }
+    
+		return path
 	}
 	
 	//文件名
-	func fileName(_ url: String) -> String? {
-		return url.components(separatedBy: "/").last
+	func fileName(_ url: String) -> String {
+    
+    guard let file = url.removingPercentEncoding?.components(separatedBy: "/").last else {
+      return "文件名"
+    }
+		return file
 	}
 	
 	//文件全路径
 	func fileFullPath(_ url: String) -> String {
-		return downloadDirectory() + "\(fileFullPath(url))"
+		return downloadDirectory() + "/\(fileName(url))"
 	}
 	
 	//文件已下载大小
@@ -58,7 +66,13 @@ class LQDownload: NSObject {
 	
 	//存储文件总长度.plist的文件路径
 	func totalLengthFullPath() -> String{
-		return downloadDirectory().appending("/totalLength.plist")
+    
+    let path = NSHomeDirectory() + "/Documents/totalLength.plist"
+    if !FileManager.default.fileExists(atPath: path) {
+      FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
+    }
+    
+		return path
 	}
 	
 	var tasks = Dictionary<String, URLSessionTask>()
@@ -88,8 +102,7 @@ class LQDownload: NSObject {
 			return
 		}
 		//任务已存在 执行 继续或暂停
-		guard let fileName = fileName(urlString) else { return }
-		if let _ = tasks[fileName] {
+		if let _ = tasks[fileName(urlString)] {
 			handle(urlString)
 			return
 		}
@@ -122,7 +135,7 @@ class LQDownload: NSObject {
 		task.setValue(taskIdentifier, forKey: "taskIdentifier")
 		
 		//保存任务
-		self.tasks.updateValue(task, forKey: fileName)
+		self.tasks.updateValue(task, forKey: fileName(urlString))
 		
 		let sessionModel = LQSessionModel(stream: stream, url: urlString, totalLength: fileSize, progressBlock: progress, stateBlock: state)
 		
@@ -143,9 +156,8 @@ class LQDownload: NSObject {
 	//获取对应资源的大小: 大小存储在totalLength.plist, key为url
 	func fileTotalSize(_ url: String) -> Int? {
 		if let data = try? Data(contentsOf: URL(fileURLWithPath: totalLengthFullPath())){
-			if let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any],
-				let fileName = fileName(url) {
-				return result?[fileName] as? Int
+			if let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] {
+				return result?[fileName(url)] as? Int
 			}
 		}
 		return nil
@@ -168,8 +180,7 @@ class LQDownload: NSObject {
 	
 	//根据url获取对应任务
 	func getTask(_ url: String) -> URLSessionTask? {
-		guard let fileName = fileName(url) else { return nil }
-		guard let task = tasks[fileName] else { return nil }
+		guard let task = tasks[fileName(url)] else { return nil }
 		return task as URLSessionTask
 	}
 	
@@ -195,7 +206,7 @@ class LQDownload: NSObject {
 
 extension LQDownload: URLSessionDataDelegate {
 	
-	//接收到相应
+	//接收到响应
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
 		
 		guard var sessionModel = getSessionModel(dataTask.taskIdentifier)  else {
@@ -204,23 +215,27 @@ extension LQDownload: URLSessionDataDelegate {
 		//打开流
 		sessionModel.stream?.open()
 		//获取本次请求 返回数据的总长度
-		let totalLength = response.expectedContentLength + fileDownloadSize(sessionModel.url)
+		let totalLength = response.expectedContentLength
 		
+    
 		sessionModel.totalLength = Int(totalLength)
-		
+    
+    sessionModels.updateValue(sessionModel, forKey: dataTask.taskIdentifier)
+		print("totalLength: \(sessionModel.totalLength)")
 		//存储总长度
 		var dict = NSMutableDictionary(contentsOf: URL(fileURLWithPath: totalLengthFullPath()))
 		if dict == nil {
 			dict = NSMutableDictionary()
 		}
-		dict?[fileName(sessionModel.url) ?? "错误URL"] = Int(totalLength)
-		
+		dict?[fileName(sessionModel.url)] = Int(totalLength)
+		dict?.write(toFile: totalLengthFullPath(), atomically: true)
 		//接受这个请求, 允许接受服务器的数据
 		completionHandler(.allow)
 	}
 	
 	//接受到服务器返回的数据
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    
 		guard let sessionModel = getSessionModel(dataTask.taskIdentifier) else {
 			return
 		}
@@ -234,7 +249,8 @@ extension LQDownload: URLSessionDataDelegate {
 		let receivedSize = fileDownloadSize(sessionModel.url)
 		let expectedSize = sessionModel.totalLength
 		let progress = Double(receivedSize) / Double(expectedSize)
-		
+    
+		print("receivedSize: \(receivedSize)\nexpectedSize: \(expectedSize)** progress: \(progress)")
 		sessionModel.progressBlock(receivedSize, expectedSize, progress)
 	}
 	
@@ -257,10 +273,7 @@ extension LQDownload: URLSessionDataDelegate {
 		sessionModel.stream = nil
 		
 		//清除任务
-		guard let fileName = fileName(sessionModel.url) else {
-			return
-		}
-		tasks.removeValue(forKey: fileName)
+		tasks.removeValue(forKey: fileName(sessionModel.url))
 		sessionModels.removeValue(forKey: task.taskIdentifier)
 	}
 }
