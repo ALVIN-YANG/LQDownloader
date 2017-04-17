@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BBADA901E7E257500127DD2 /* 序列Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADA8F1E7E257500127DD2 /* 序列Sequence.swift */; };
 		1BC2E33F1E75235B009A19C2 /* 尾递归.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2E33E1E75235B009A19C2 /* 尾递归.swift */; };
+		1BC2E3411E79719C009A19C2 /* HelloSelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2E3401E79719C009A19C2 /* HelloSelf.swift */; };
 		1BCB26291E744C0900B4F953 /* 安全的资源管理.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB26281E744C0900B4F953 /* 安全的资源管理.swift */; };
 		1BCB262B1E74F1A000B4F953 /* PrintLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB262A1E74F1A000B4F953 /* PrintLog.swift */; };
 		1BCB262D1E75073F00B4F953 /* 属性访问限制.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB262C1E75073F00B4F953 /* 属性访问限制.swift */; };
@@ -27,7 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BBADA8F1E7E257500127DD2 /* 序列Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "序列Sequence.swift"; sourceTree = "<group>"; };
 		1BC2E33E1E75235B009A19C2 /* 尾递归.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "尾递归.swift"; sourceTree = "<group>"; };
+		1BC2E3401E79719C009A19C2 /* HelloSelf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelloSelf.swift; sourceTree = "<group>"; };
 		1BCB26281E744C0900B4F953 /* 安全的资源管理.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "安全的资源管理.swift"; sourceTree = "<group>"; };
 		1BCB262A1E74F1A000B4F953 /* PrintLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintLog.swift; sourceTree = "<group>"; };
 		1BCB262C1E75073F00B4F953 /* 属性访问限制.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "属性访问限制.swift"; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 				1BCB262C1E75073F00B4F953 /* 属性访问限制.swift */,
 				1BCB262E1E750B1C00B4F953 /* 列举enum类型.swift */,
 				1BC2E33E1E75235B009A19C2 /* 尾递归.swift */,
+				1BBADA8F1E7E257500127DD2 /* 序列Sequence.swift */,
+				1BC2E3401E79719C009A19C2 /* HelloSelf.swift */,
 				FF58BAD01E6D177E0038E352 /* Main.storyboard */,
 				FF58BAD31E6D177E0038E352 /* Assets.xcassets */,
 				FF6CD6E61E7127A0002AB237 /* SwiftTips-Bridging-Header.h */,
@@ -185,8 +191,10 @@
 				FFD6620B1E729A250007B856 /* 同步锁.swift in Sources */,
 				FFD6620D1E729E4B0007B856 /* 转移内存管理权.swift in Sources */,
 				FFD6620F1E72AEAF0007B856 /* 随机数生成.swift in Sources */,
+				1BBADA901E7E257500127DD2 /* 序列Sequence.swift in Sources */,
 				1BC2E33F1E75235B009A19C2 /* 尾递归.swift in Sources */,
 				1BCB26291E744C0900B4F953 /* 安全的资源管理.swift in Sources */,
+				1BC2E3411E79719C009A19C2 /* HelloSelf.swift in Sources */,
 				FF6CD6E51E7113F2002AB237 /* Drinking.swift in Sources */,
 				1BCB262D1E75073F00B4F953 /* 属性访问限制.swift in Sources */,
 			);
