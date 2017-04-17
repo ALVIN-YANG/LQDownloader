@@ -8,7 +8,7 @@
 
 import UIKit
 
-func printLog<T>(_ message: T,
+func printInfo<T>(_ message: T,
 								
 								file: String = #file,
 								
@@ -21,4 +21,12 @@ func printLog<T>(_ message: T,
 	print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
 	
 	#endif
+}
+
+func printLog<T>(_ message: T) {
+  #if DEBUG
+  
+  print (message)
+  
+  #endif
 }
